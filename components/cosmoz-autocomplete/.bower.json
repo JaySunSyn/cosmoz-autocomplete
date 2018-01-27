@@ -1,0 +1,28 @@
+{
+  "name": "cosmoz-autocomplete",
+  "main": "cosmoz-autocomplete.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-input": "^2.1.0",
+    "iron-input": "^2.0.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  },
+  "homepage": "https://github.com/JaySunSyn/cosmoz-autocomplete",
+  "_release": "58616e5e7d",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "58616e5e7d05b36cc50a22154cb556e8b5cc6993"
+  },
+  "_source": "https://github.com/JaySunSyn/cosmoz-autocomplete.git",
+  "_target": "master",
+  "_originalSource": "https://github.com/JaySunSyn/cosmoz-autocomplete.git",
+  "_direct": true
+}

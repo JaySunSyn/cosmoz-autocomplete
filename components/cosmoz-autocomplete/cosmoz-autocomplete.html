@@ -1,0 +1,165 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-input-container.html">
+<link rel="import" href="../paper-input/paper-input-behavior.html">
+<link rel="import" href="../iron-input/iron-input.html">
+
+<dom-module id="cosmoz-autocomplete">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      input {
+        position: relative;
+        /* to make a stacking context */
+        outline: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+        background: transparent;
+        border: none;
+        color: var(--paper-input-container-input-color, var(--primary-text-color));
+        -webkit-appearance: none;
+        text-align: inherit;
+        vertical-align: bottom;
+
+        /* Firefox sets a min-width on the input, which can cause layout issues */
+        min-width: 0;
+
+        @apply --paper-font-subhead;
+        @apply --paper-input-container-input;
+      }
+
+      input:disabled {
+        @apply --paper-input-container-input-disabled;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        @apply --paper-input-container-input-webkit-spinner;
+      }
+
+      input::-webkit-clear-button {
+        @apply --paper-input-container-input-webkit-clear;
+      }
+
+      input::-webkit-input-placeholder {
+        color: var(--paper-input-container-color, var(--secondary-text-color));
+      }
+
+      input:-moz-placeholder {
+        color: var(--paper-input-container-color, var(--secondary-text-color));
+      }
+
+      input::-moz-placeholder {
+        color: var(--paper-input-container-color, var(--secondary-text-color));
+      }
+
+      input::-ms-clear {
+        @apply --paper-input-container-ms-clear;
+      }
+
+      input::-ms-reveal {
+        @apply --paper-input-container-ms-reveal;
+      }
+
+      input:-ms-input-placeholder {
+        color: var(--paper-input-container-color, var(--secondary-text-color));
+      }
+
+      label {
+        pointer-events: none;
+      }
+    </style>
+    <paper-input-container>
+      <label slot="label">Label</label>
+      <iron-input id="in" bind-value="{{inputValue}}" slot="input" class="input-element">
+        <input type="search" list="dataList">
+      </iron-input>
+    </paper-input-container>
+    <datalist id="dataList">
+      <template is="dom-repeat" items="[[source]]">
+        <option value="[[_getText(item)]]"></option>
+      </template>
+    </datalist>
+  </template>
+
+  <script>
+    /**
+     * `cosmoz-autocomplete`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class CosmozAutocomplete extends Polymer.mixinBehaviors(Polymer.PaperInputBehavior, Polymer.Element) {
+      static get is() { return 'cosmoz-autocomplete'; }
+      static get properties() {
+        return {
+          source: {
+            type: Array
+          },
+
+          inputValue: {
+            type: String,
+            observer: '_inputValueChanged'
+          },
+
+          value: {
+            type: String
+          },
+
+          selectedItem: {
+            type: Object,
+            observer: '_selectedItemChanged'
+          },
+
+          valueProperty: {
+            type: String
+          },
+
+          textProperty: {
+            type: String
+          },
+
+          _inputId: {
+            type: String,
+            value: 'in'
+          }
+        };
+      }
+
+      _getValue(item) {
+        return this.valueProperty ? this.get(this.valueProperty, item) : item;
+      }
+
+      _getText(item) {
+        return this.textProperty ? this.get(this.textProperty, item) : item;
+      }
+
+      _getItem(text) {
+        if (!Array.isArray(this.source)) {
+          return;
+        }
+        return this.source.find(s => this._getText(s) === text);
+      }
+
+      _inputValueChanged(value) {
+        if (!Array.isArray(this.source)) {
+          return;
+        }
+        this.selectedItem = this.source.find(s => s === this._getItem(value));
+      }
+
+      _selectedItemChanged(item) {
+        this.value = this._getValue(item);
+      }
+    }
+
+    window.customElements.define(CosmozAutocomplete.is, CosmozAutocomplete);
+  </script>
+</dom-module>
