@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>cosmoz-autocomplete demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../cosmoz-autocomplete.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic cosmoz-autocomplete demo</h3>
+      <demo-snippet>
+        <template>
+          <cosmoz-autocomplete source='["Alabama", "A", "B", "Banana", "C"]'></cosmoz-autocomplete>
+          <cosmoz-autocomplete text-property="text" value-property="value" source='[{"text": "Alabama", "value": 1}, {"text": "Banana", "value": 2}]'></cosmoz-autocomplete>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
